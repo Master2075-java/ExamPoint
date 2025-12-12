@@ -1,0 +1,186 @@
+{
+  "id": "102019b0630795b763caf32b5383091c11c",
+  "version": "102019b1079416a7e66b70c0ffc100c7a0c",
+  "schema": {
+    "name": "quiz",
+    "description": "Records of quizzes taken by users.",
+    "fields": [
+      {
+        "name": "id",
+        "description": "Unique identifier for the quiz record.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System identifier"
+        }
+      },
+      {
+        "name": "data_creator",
+        "description": "id of the user who creates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal auditing"
+        }
+      },
+      {
+        "name": "data_updater",
+        "description": "id of the user who updates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal auditing"
+        }
+      },
+      {
+        "name": "create_time",
+        "description": "create time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System metadata"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "update_time",
+        "description": "update time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System metadata"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "user_id",
+        "description": "Foreign key referencing the user who took the quiz.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Data ownership"
+        }
+      },
+      {
+        "name": "subject",
+        "description": "Subject of the quiz.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Content classification"
+        }
+      },
+      {
+        "name": "difficulty_level",
+        "description": "Difficulty level of the quiz.",
+        "type": 100,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Content classification"
+        },
+        "enumeration": [
+          {
+            "value": "Unspecified"
+          },
+          {
+            "number": 1,
+            "value": "Easy"
+          },
+          {
+            "number": 2,
+            "value": "Medium"
+          },
+          {
+            "number": 3,
+            "value": "Hard"
+          }
+        ]
+      },
+      {
+        "name": "completion_date",
+        "description": "Timestamp when the quiz was completed.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Performance tracking"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "score",
+        "description": "Score achieved in the quiz.",
+        "type": 2,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Performance tracking"
+        },
+        "numeric": "float"
+      },
+      {
+        "name": "total_questions",
+        "description": "Total number of questions in the quiz.",
+        "type": 2,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Metadata"
+        },
+        "numeric": "int"
+      }
+    ],
+    "indexes": [
+      {
+        "fields": [
+          "id"
+        ],
+        "unique": true,
+        "primary": true,
+        "order": false
+      },
+      {
+        "fields": [
+          "user_id"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "data_creator"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "data_updater"
+        ],
+        "order": false
+      }
+    ],
+    "relations": [
+      {
+        "referencing_fields": [
+          "user_id"
+        ],
+        "referenced_entity": {
+          "name": "user"
+        },
+        "referenced_fields": [
+          "id"
+        ],
+        "cascade": true
+      }
+    ]
+  },
+  "task": {
+    "id": "693b83460b35e4b62b0f24d1",
+    "root": "6938e05c60b30fd313d1ecfa",
+    "project": "6938e05c60b30fd313d1ecf9",
+    "user": "58f1e300-90d1-70cc-bada-f4dfacd9449e"
+  },
+  "namespace": {
+    "id": "01987547fc6c72ecb453bd2736bd4ea0",
+    "tenant": 2,
+    "name": "global-1",
+    "default": true
+  },
+  "revision": 1
+}

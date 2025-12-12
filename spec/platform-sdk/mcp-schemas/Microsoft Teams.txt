@@ -1,0 +1,138 @@
+Mcp name: "Microsoft Teams"
+Mcp id: "686de4146fd1cae1afbb55b7"
+Mcp url: "https://backend.composio.dev/v3/mcp/d2f45247-547e-4ef6-a700-ed8fd05eca0d/mcp?user_id=6938e05c60b30fd313d1ecf9"
+Schema info:
+Tool Name: MICROSOFT_TEAMS_ADD_MEMBER_TO_TEAM
+
+Here is the input and output schema info of Tool MICROSOFT_TEAMS_ADD_MEMBER_TO_TEAM of Mcp Microsoft Teams (Mcp Id: 686de4146fd1cae1afbb55b7):
+inputSchema:
+{"type":"object","properties":{"roles":{"type":"array","description":"Roles to assign to the member. Only 'owner' is supported. Omit or leave empty to add as a standard member.","title":"Roles","items":{"type":"string","properties":{},"const":"owner"},"examples":[["owner"]]},"team_id":{"type":"string","description":"The unique ID (GUID) of the Microsoft Team to which the member will be added.","title":"Team Id","examples":["ee0f5ae2-8bc6-4ae5-8466-7daeebbfa062"]},"user_id":{"type":"string","description":"The user's Graph ID (GUID) or userPrincipalName (email) to add to the team.","title":"User Id","examples":["8b081ef6-4792-4def-b2c9-c363a1bf41d5","user@contoso.com"]}},"required":["team_id","user_id"],"title":"AddMemberToTeamRequest"}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"displayName":{"type":"string","description":"Display name of the added user.","title":"Display Name"},"email":{"type":"string","description":"Email address of the added user, if available.","title":"Email","default":null,"nullable":true},"id":{"type":"string","description":"The ID of the conversation member assigned by Graph.","title":"Id"},"roles":{"type":"array","description":"Roles assigned to the member.","title":"Roles","items":{"type":"string","properties":{}}},"userId":{"type":"string","description":"The Graph user ID of the added member.","title":"User Id"}},"required":["id","roles","userId","displayName"],"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"AddMemberToTeamResponseWrapper"}
+schema info of MICROSOFT_TEAMS_ADD_MEMBER_TO_TEAM ends.
+
+
+Mcp name: "Microsoft Teams"
+Mcp id: "686de4146fd1cae1afbb55b7"
+Mcp url: "https://backend.composio.dev/v3/mcp/d2f45247-547e-4ef6-a700-ed8fd05eca0d/mcp?user_id=6938e05c60b30fd313d1ecf9"
+Schema info:
+Tool Name: MICROSOFT_TEAMS_ARCHIVE_TEAM
+
+Here is the input and output schema info of Tool MICROSOFT_TEAMS_ARCHIVE_TEAM of Mcp Microsoft Teams (Mcp Id: 686de4146fd1cae1afbb55b7):
+inputSchema:
+{"type":"object","properties":{"should_set_spo_site_read_only_for_members":{"type":"boolean","description":"If true, sets the SharePoint site to read-only for team members when archiving.","title":"Should Set Spo Site Read Only For Members","default":false,"examples":[true]},"team_id":{"type":"string","description":"The Microsoft Teams team GUID to archive.","title":"Team Id","examples":["f47ac10b-58cc-4372-a567-0e02b2c3d479"]}},"required":["team_id"],"title":"ArchiveTeamRequest"}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"status_code":{"type":"integer","description":"HTTP status code returned by the archive operation (202 indicates accepted).","title":"Status Code"}},"required":["status_code"],"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"ArchiveTeamResponseWrapper"}
+schema info of MICROSOFT_TEAMS_ARCHIVE_TEAM ends.
+
+
+Mcp name: "Microsoft Teams"
+Mcp id: "686de4146fd1cae1afbb55b7"
+Mcp url: "https://backend.composio.dev/v3/mcp/d2f45247-547e-4ef6-a700-ed8fd05eca0d/mcp?user_id=6938e05c60b30fd313d1ecf9"
+Schema info:
+Tool Name: MICROSOFT_TEAMS_CHATS_GET_ALL_CHATS
+
+Here is the input and output schema info of Tool MICROSOFT_TEAMS_CHATS_GET_ALL_CHATS of Mcp Microsoft Teams (Mcp Id: 686de4146fd1cae1afbb55b7):
+inputSchema:
+{"type":"object","properties":{"filter":{"type":"string","description":"An OData filter query string to apply to the chat list (e.g., \"topic eq 'Project Updates'\"). Do not include '$filter=' in the string. This enables retrieving chats that match specific criteria.","title":"Filter","default":"","examples":["topic eq 'Engineering Team'","chatType eq 'oneOnOne' and contains(topic, 'Review')"]},"select":{"type":"array","description":"A list of specific Microsoft Graph chat resource properties to retrieve (e.g., 'id', 'topic'). If omitted or empty, a default set of properties is returned. Each string in the list should be a valid property name.","title":"Select","default":[],"items":{"type":"string","properties":{}},"examples":[["id","topic","lastMessagePreview"],["webUrl","chatType"]]},"top":{"type":"integer","description":"The maximum number of chats to retrieve in a single API call, used for pagination. Default is 50. Must be a positive integer.","title":"Top","default":50,"examples":["25","50","100"]},"user_id":{"type":"string","description":"The ID or user principal name (UPN) of the user whose chats are to be retrieved. Use 'me' to specify the currently authenticated user.","title":"User Id","default":"me","examples":["me","user@example.com"]}},"title":"GetAllChatsRequest"}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"response_data":{"type":"object","description":"A dictionary representing the full OData response from the Microsoft Graph API. This typically includes a 'value' field containing an array of chat objects, and may also contain '@odata.context' for metadata and '@odata.nextLink' for pagination if more results are available.","title":"Response Data","additionalProperties":true}},"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"GetAllChatsResponseWrapper"}
+schema info of MICROSOFT_TEAMS_CHATS_GET_ALL_CHATS ends.
+
+
+Mcp name: "Microsoft Teams"
+Mcp id: "686de4146fd1cae1afbb55b7"
+Mcp url: "https://backend.composio.dev/v3/mcp/d2f45247-547e-4ef6-a700-ed8fd05eca0d/mcp?user_id=6938e05c60b30fd313d1ecf9"
+Schema info:
+Tool Name: MICROSOFT_TEAMS_CHATS_GET_ALL_MESSAGES
+
+Here is the input and output schema info of Tool MICROSOFT_TEAMS_CHATS_GET_ALL_MESSAGES of Mcp Microsoft Teams (Mcp Id: 686de4146fd1cae1afbb55b7):
+inputSchema:
+{"type":"object","properties":{"chat_id":{"type":"string","description":"Unique identifier of the Microsoft Teams chat.","title":"Chat Id","examples":["chat-id-123"]},"filter":{"type":"string","description":"OData v4.0 filter query string for messages. If empty, no filtering is applied.","title":"Filter","default":"","examples":["from/emailAddress/address eq 'user@example.com'"]},"select":{"type":"array","description":"Message properties to return (e.g., 'id', 'body'). Optimizes the request. If empty, a default set of properties is returned.","title":"Select","default":[],"items":{"type":"string","properties":{}},"examples":[["id","body","from"]]},"top":{"type":"integer","description":"Maximum number of messages to retrieve per page. Used for pagination.","title":"Top","default":50,"examples":["50"]}},"required":["chat_id"],"title":"GetAllMessagesRequest"}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"response_data":{"type":"object","description":"API response from Microsoft Graph, typically including '@odata.context' and a 'value' list of message objects.","title":"Response Data","additionalProperties":true}},"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"GetAllMessagesResponseWrapper"}
+schema info of MICROSOFT_TEAMS_CHATS_GET_ALL_MESSAGES ends.
+
+
+Mcp name: "Microsoft Teams"
+Mcp id: "686de4146fd1cae1afbb55b7"
+Mcp url: "https://backend.composio.dev/v3/mcp/d2f45247-547e-4ef6-a700-ed8fd05eca0d/mcp?user_id=6938e05c60b30fd313d1ecf9"
+Schema info:
+Tool Name: MICROSOFT_TEAMS_CREATE_MEETING
+
+Here is the input and output schema info of Tool MICROSOFT_TEAMS_CREATE_MEETING of Mcp Microsoft Teams (Mcp Id: 686de4146fd1cae1afbb55b7):
+inputSchema:
+{"type":"object","properties":{"end_date_time":{"type":"string","description":"The end date and time of the meeting, specified in ISO 8601 format (e.g., '2024-08-15T11:00:00Z'). Must be after start_date_time.","title":"End Date Time","format":"date-time","examples":["2024-08-15T11:00:00Z"]},"is_passcode_required":{"type":"boolean","description":"An optional boolean indicating whether a passcode should be required to join this meeting. If not specified, the organization's default policy applies.","title":"Is Passcode Required","default":null,"nullable":true},"participants":{"type":"array","description":"An optional list of participants to invite to the meeting. Each participant is defined by their user ID and role.","title":"Participants","default":null,"nullable":true,"items":{"type":"object","description":"Specifies a participant's identity (user ID) and role for a Microsoft Teams online meeting.","title":"OnlineMeetingParticipant","properties":{"role":{"type":"string","description":"Specifies the role of the participant in the meeting. Defaults to 'attendee'. Allowed values are 'attendee', 'presenter', or 'coorganizer'.","title":"Role","default":"attendee","enum":["attendee","presenter","coorganizer"]},"user_id":{"type":"string","description":"The unique identifier (GUID) of the Microsoft Teams user to be added as a participant.","title":"User Id"}},"required":["user_id"]}},"start_date_time":{"type":"string","description":"The start date and time of the meeting, specified in ISO 8601 format (e.g., '2024-08-15T10:00:00Z').","title":"Start Date Time","format":"date-time","examples":["2024-08-15T10:00:00Z"]},"subject":{"type":"string","description":"The subject or title for the online meeting.","title":"Subject","examples":["Project Sync-Up"]}},"required":["start_date_time","end_date_time","subject"],"title":"CreateMeetingRequest","description":"Request schema for creating a new Microsoft Teams online meeting."}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"response_data":{"type":"object","description":"The raw JSON response received from the Microsoft Graph API upon successful creation of the meeting. This includes details like the meeting join URL and other meeting properties.","title":"Response Data","additionalProperties":true}},"required":["response_data"],"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"CreateMeetingResponseWrapper"}
+schema info of MICROSOFT_TEAMS_CREATE_MEETING ends.
+
+
+Mcp name: "Microsoft Teams"
+Mcp id: "686de4146fd1cae1afbb55b7"
+Mcp url: "https://backend.composio.dev/v3/mcp/d2f45247-547e-4ef6-a700-ed8fd05eca0d/mcp?user_id=6938e05c60b30fd313d1ecf9"
+Schema info:
+Tool Name: MICROSOFT_TEAMS_CREATE_TEAM
+
+Here is the input and output schema info of Tool MICROSOFT_TEAMS_CREATE_TEAM of Mcp Microsoft Teams (Mcp Id: 686de4146fd1cae1afbb55b7):
+inputSchema:
+{"type":"object","properties":{"description":{"type":"string","description":"Description for the new team.","title":"Description","default":null,"nullable":true},"displayName":{"type":"string","description":"Name of the new team.","title":"Display Name","examples":["My Sample Team"]},"firstChannelName":{"type":"string","description":"Name of the first channel created; defaults to 'General' if omitted.","title":"First Channel Name","default":null,"nullable":true},"members":{"type":"array","description":"List of initial members to add to the team. Each must include '@odata.type', roles, and 'user@odata.bind'.","title":"Members","default":null,"nullable":true,"items":{"type":"object","description":"Defines a conversation member to add to the new team.","title":"Member","properties":{"odata_type":{"type":"string","description":"Resource type for conversation member; must be '#microsoft.graph.aadUserConversationMember'.","title":"Odata Type","const":"#microsoft.graph.aadUserConversationMember"},"roles":{"type":"array","title":"Roles","items":{"type":"string","properties":{},"enum":["owner","member"]}},"user_odata_bind":{"type":"string","description":"URL to the user resource, e.g. https://graph.microsoft.com/v1.0/users('{id}').","title":"User Odata Bind"}},"required":["odata_type","roles","user_odata_bind"]}},"template_odata_bind":{"type":"string","description":"URL of the Teams template to apply.","title":"Template Odata Bind","default":null,"nullable":true},"visibility":{"type":"string","title":"Visibility","nullable":true,"enum":["private","public"]}},"required":["displayName","visibility"],"title":"CreateTeamRequest","description":"Request payload to create a new Microsoft Teams team."}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"content_location":{"type":"string","description":"URL of the created team (from 'Content-Location' header).","title":"Content Location","default":null,"nullable":true},"location":{"type":"string","description":"URL to check the status of the team creation operation (from 'Location' header).","title":"Location"}},"required":["location"],"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"CreateTeamResponseWrapper"}
+schema info of MICROSOFT_TEAMS_CREATE_TEAM ends.
+
+
+Mcp name: "Microsoft Teams"
+Mcp id: "686de4146fd1cae1afbb55b7"
+Mcp url: "https://backend.composio.dev/v3/mcp/d2f45247-547e-4ef6-a700-ed8fd05eca0d/mcp?user_id=6938e05c60b30fd313d1ecf9"
+Schema info:
+Tool Name: MICROSOFT_TEAMS_DELETE_TEAM
+
+Here is the input and output schema info of Tool MICROSOFT_TEAMS_DELETE_TEAM of Mcp Microsoft Teams (Mcp Id: 686de4146fd1cae1afbb55b7):
+inputSchema:
+{"type":"object","properties":{"team_id":{"type":"string","description":"The unique identifier (GUID) of the Microsoft Teams team to delete.","title":"Team Id","examples":["fbe2bf47-16c8-47cf-b4a5-4b9b187c508b"]}},"required":["team_id"],"title":"DeleteTeamRequest"}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"success":{"type":"boolean","description":"Indicates whether the team was successfully deleted.","title":"Success"}},"required":["success"],"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"DeleteTeamResponseWrapper"}
+schema info of MICROSOFT_TEAMS_DELETE_TEAM ends.
+
+
+Mcp name: "Microsoft Teams"
+Mcp id: "686de4146fd1cae1afbb55b7"
+Mcp url: "https://backend.composio.dev/v3/mcp/d2f45247-547e-4ef6-a700-ed8fd05eca0d/mcp?user_id=6938e05c60b30fd313d1ecf9"
+Schema info:
+Tool Name: MICROSOFT_TEAMS_GET_CHANNEL
+
+Here is the input and output schema info of Tool MICROSOFT_TEAMS_GET_CHANNEL of Mcp Microsoft Teams (Mcp Id: 686de4146fd1cae1afbb55b7):
+inputSchema:
+{"type":"object","properties":{"channel_id":{"type":"string","description":"The unique identifier of the channel within the specified team.","title":"Channel Id","examples":["19:general@thread.v2"]},"team_id":{"type":"string","description":"The unique identifier of the Microsoft Teams team.","title":"Team Id","examples":["1234-5678-9012-3456"]}},"required":["team_id","channel_id"],"title":"GetChannelRequest","description":"Parameters for retrieving a specific channel in a team."}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"createdDateTime":{"type":"string","description":"Timestamp when the channel was created (ISO 8601).","title":"Created Date Time"},"description":{"type":"string","description":"Description of the channel.","title":"Description","default":null,"nullable":true},"displayName":{"type":"string","description":"Display name of the channel.","title":"Display Name"},"email":{"type":"string","description":"Email address of the channel, if enabled.","title":"Email","default":null,"nullable":true},"id":{"type":"string","description":"Unique identifier of the channel.","title":"Id"},"membershipType":{"type":"string","description":"Type of the channel: standard, private, or shared.","title":"Membership Type"},"webUrl":{"type":"string","description":"URL to open the channel in Microsoft Teams.","title":"Web Url"}},"required":["id","displayName","membershipType","webUrl","createdDateTime"],"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"ChannelDetailWrapper"}
+schema info of MICROSOFT_TEAMS_GET_CHANNEL ends.
+
+
+Mcp name: "Microsoft Teams"
+Mcp id: "686de4146fd1cae1afbb55b7"
+Mcp url: "https://backend.composio.dev/v3/mcp/d2f45247-547e-4ef6-a700-ed8fd05eca0d/mcp?user_id=6938e05c60b30fd313d1ecf9"
+Schema info:
+Tool Name: MICROSOFT_TEAMS_GET_CHAT_MESSAGE
+
+Here is the input and output schema info of Tool MICROSOFT_TEAMS_GET_CHAT_MESSAGE of Mcp Microsoft Teams (Mcp Id: 686de4146fd1cae1afbb55b7):
+inputSchema:
+{"type":"object","properties":{"chat_id":{"type":"string","description":"Unique identifier of the Microsoft Teams chat that contains the message.","title":"Chat Id","examples":["19:abc123def456ghi789@thread.v2"]},"message_id":{"type":"string","description":"Unique identifier of the chat message to retrieve.","title":"Message Id","examples":["1598231234_42"]}},"required":["chat_id","message_id"],"title":"GetChatMessageRequest"}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"message":{"type":"object","description":"The retrieved chat message details.","title":"Message","properties":{"attachments":{"type":"array","description":"List of attachments attached to the message, if any.","title":"Attachments","items":{"type":"object","properties":{},"additionalProperties":true}},"body":{"type":"object","description":"JSON object of the message body, including contentType and content.","title":"Body","additionalProperties":true},"chatId":{"type":"string","description":"Identifier of the chat containing this message.","title":"Chat Id"},"createdDateTime":{"type":"string","description":"UTC timestamp when the message was created.","title":"Created Date Time"},"deletedDateTime":{"type":"string","description":"UTC timestamp when the message was deleted, if deleted.","title":"Deleted Date Time","default":null,"nullable":true},"id":{"type":"string","description":"Unique identifier of the chat message.","title":"Id"},"importance":{"type":"string","description":"Importance level of the message: 'normal', 'high', or 'urgent'.","title":"Importance","default":null,"nullable":true,"examples":["normal","high","urgent"]},"lastEditedDateTime":{"type":"string","description":"UTC timestamp when the message was last edited, if available.","title":"Last Edited Date Time","default":null,"nullable":true},"lastModifiedDateTime":{"type":"string","description":"UTC timestamp when the message was last modified, if edited.","title":"Last Modified Date Time","default":null,"nullable":true},"locale":{"type":"string","description":"Locale set by the client for the message.","title":"Locale","default":null,"nullable":true},"sender":{"type":"object","description":"JSON object representing the message sender.","title":"Sender","default":null,"nullable":true,"additionalProperties":true},"subject":{"type":"string","description":"Subject of the message, if any.","title":"Subject","default":null,"nullable":true},"summary":{"type":"string","description":"Summary text of the message.","title":"Summary","default":null,"nullable":true},"webUrl":{"type":"string","description":"URL to view the message in Microsoft Teams.","title":"Web Url","default":null,"nullable":true}},"required":["id","createdDateTime","chatId","body"],"additionalProperties":false}},"required":["message"],"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"GetChatMessageResponseWrapper"}
+schema info of MICROSOFT_TEAMS_GET_CHAT_MESSAGE ends.
+
+
+Mcp name: "Microsoft Teams"
+Mcp id: "686de4146fd1cae1afbb55b7"
+Mcp url: "https://backend.composio.dev/v3/mcp/d2f45247-547e-4ef6-a700-ed8fd05eca0d/mcp?user_id=6938e05c60b30fd313d1ecf9"
+Schema info:
+Tool Name: MICROSOFT_TEAMS_GET_TEAM
+
+Here is the input and output schema info of Tool MICROSOFT_TEAMS_GET_TEAM of Mcp Microsoft Teams (Mcp Id: 686de4146fd1cae1afbb55b7):
+inputSchema:
+{"type":"object","properties":{"team_id":{"type":"string","description":"GUID of the Microsoft Teams team to retrieve.","title":"Team Id","examples":["123e4567-e89b-12d3-a456-426614174000"]}},"required":["team_id"],"title":"GetTeamRequest"}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"classification":{"type":"string","description":"Classification of the team.","title":"Classification","default":null,"nullable":true},"description":{"type":"string","description":"Description of the team, if any.","title":"Description","default":null,"nullable":true},"discovery_settings":{"type":"object","description":"Discovery settings for the team.","title":"Discovery Settings","properties":{"show_in_teams_search_and_suggestions":{"type":"boolean","description":"Whether the team shows in Teams search and suggestions.","title":"Show In Teams Search And Suggestions"}},"required":["show_in_teams_search_and_suggestions"],"additionalProperties":false},"display_name":{"type":"string","description":"Display name of the team.","title":"Display Name"},"fun_settings":{"type":"object","description":"Fun settings for the team.","title":"Fun Settings","properties":{"allow_giphy":{"type":"boolean","description":"Whether Giphy GIFs are allowed in the team.","title":"Allow Giphy"},"giphy_content_rating":{"type":"string","description":"Content rating for Giphy GIFs: 'Moderate' or 'Strict'.","title":"Giphy Content Rating"}},"required":["allow_giphy","giphy_content_rating"],"additionalProperties":false},"guest_settings":{"type":"object","description":"Guest settings for the team.","title":"Guest Settings","properties":{"allow_create_update_channels":{"type":"boolean","description":"Whether guests can create or update channels in the team.","title":"Allow Create Update Channels"},"allow_delete_channels":{"type":"boolean","description":"Whether guests can delete channels in the team.","title":"Allow Delete Channels"}},"required":["allow_create_update_channels","allow_delete_channels"],"additionalProperties":false},"id":{"type":"string","description":"Unique identifier of the team.","title":"Id"},"internal_id":{"type":"string","description":"Internal identifier of the team.","title":"Internal Id","default":null,"nullable":true},"is_archived":{"type":"boolean","description":"Whether the team is archived.","title":"Is Archived","default":null,"nullable":true},"member_settings":{"type":"object","description":"Member settings for the team.","title":"Member Settings","properties":{"allow_create_update_channels":{"type":"boolean","description":"Whether team members can create or update channels.","title":"Allow Create Update Channels"},"allow_delete_channels":{"type":"boolean","description":"Whether team members can delete channels.","title":"Allow Delete Channels"}},"required":["allow_create_update_channels","allow_delete_channels"],"additionalProperties":false},"messaging_settings":{"type":"object","description":"Messaging settings for the team.","title":"Messaging Settings","properties":{"allow_channel_mentions":{"type":"boolean","description":"Whether @channel mentions are enabled.","title":"Allow Channel Mentions"},"allow_owner_delete_messages":{"type":"boolean","description":"Whether owners can delete any messages.","title":"Allow Owner Delete Messages"},"allow_team_mentions":{"type":"boolean","description":"Whether @team mentions are enabled.","title":"Allow Team Mentions"},"allow_user_delete_messages":{"type":"boolean","description":"Whether users can delete their messages.","title":"Allow User Delete Messages"},"allow_user_edit_messages":{"type":"boolean","description":"Whether users can edit their messages.","title":"Allow User Edit Messages"}},"required":["allow_user_edit_messages","allow_user_delete_messages","allow_owner_delete_messages","allow_team_mentions","allow_channel_mentions"],"additionalProperties":false},"specialization":{"type":"string","description":"Team specialization.","title":"Specialization","default":null,"nullable":true},"visibility":{"type":"string","description":"Visibility of the team.","title":"Visibility","default":null,"nullable":true},"web_url":{"type":"string","description":"Web URL for the team.","title":"Web Url","default":null,"nullable":true}},"required":["id","display_name","fun_settings","guest_settings","member_settings","messaging_settings","discovery_settings"],"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"GetTeamResponseWrapper"}
+schema info of MICROSOFT_TEAMS_GET_TEAM ends.

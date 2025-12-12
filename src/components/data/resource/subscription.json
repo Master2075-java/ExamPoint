@@ -1,0 +1,199 @@
+{
+  "id": "102019b0630795c7259bc87d39c55c4f024",
+  "version": "102019b1079416a7e66b70c0ffc100c7a0c",
+  "schema": {
+    "name": "subscription",
+    "description": "Details of payments and subscription validity for users.",
+    "fields": [
+      {
+        "name": "id",
+        "description": "Unique identifier for the subscription record.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System identifier"
+        }
+      },
+      {
+        "name": "data_creator",
+        "description": "id of the user who creates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal auditing"
+        }
+      },
+      {
+        "name": "data_updater",
+        "description": "id of the user who updates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal auditing"
+        }
+      },
+      {
+        "name": "create_time",
+        "description": "create time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System metadata"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "update_time",
+        "description": "update time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System metadata"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "user_id",
+        "description": "Foreign key referencing the user.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Data ownership"
+        }
+      },
+      {
+        "name": "tier",
+        "description": "Subscription tier purchased.",
+        "type": 100,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Business logic"
+        },
+        "enumeration": [
+          {
+            "value": "Unspecified"
+          },
+          {
+            "number": 1,
+            "value": "Basic"
+          },
+          {
+            "number": 2,
+            "value": "Elite"
+          }
+        ]
+      },
+      {
+        "name": "payment_status",
+        "description": "Status of the payment transaction.",
+        "type": 100,
+        "compliance": {
+          "confidentiality": 3,
+          "reason": "Financial record"
+        },
+        "enumeration": [
+          {
+            "value": "Unspecified"
+          },
+          {
+            "number": 1,
+            "value": "Paid"
+          },
+          {
+            "number": 2,
+            "value": "Pending"
+          },
+          {
+            "number": 3,
+            "value": "Failed"
+          }
+        ]
+      },
+      {
+        "name": "start_date",
+        "description": "Start date of the subscription period.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Service provisioning"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "renewal_date",
+        "description": "Date when the subscription renews or expires.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Service provisioning"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "amount",
+        "description": "Amount paid for the subscription.",
+        "type": 2,
+        "compliance": {
+          "confidentiality": 3,
+          "reason": "Financial record"
+        },
+        "numeric": "float"
+      }
+    ],
+    "indexes": [
+      {
+        "fields": [
+          "id"
+        ],
+        "unique": true,
+        "primary": true,
+        "order": false
+      },
+      {
+        "fields": [
+          "user_id"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "data_creator"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "data_updater"
+        ],
+        "order": false
+      }
+    ],
+    "relations": [
+      {
+        "referencing_fields": [
+          "user_id"
+        ],
+        "referenced_entity": {
+          "name": "user"
+        },
+        "referenced_fields": [
+          "id"
+        ],
+        "cascade": true
+      }
+    ]
+  },
+  "task": {
+    "id": "693b83460b35e4b62b0f24d1",
+    "root": "6938e05c60b30fd313d1ecfa",
+    "project": "6938e05c60b30fd313d1ecf9",
+    "user": "58f1e300-90d1-70cc-bada-f4dfacd9449e"
+  },
+  "namespace": {
+    "id": "01987547fc6c72ecb453bd2736bd4ea0",
+    "tenant": 2,
+    "name": "global-1",
+    "default": true
+  },
+  "revision": 1
+}

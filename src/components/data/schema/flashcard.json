@@ -1,0 +1,167 @@
+{
+  "id": "102019b063026af750790a043f9b06f8867",
+  "version": "102019b063026af73f59367c34baf770a4e",
+  "schema": {
+    "name": "flashcard",
+    "description": "Represents study flashcards created by users.",
+    "fields": [
+      {
+        "name": "id",
+        "description": "Unique identifier for the flashcard.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System identifier"
+        }
+      },
+      {
+        "name": "data_creator",
+        "description": "id of the user who creates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal auditing"
+        }
+      },
+      {
+        "name": "data_updater",
+        "description": "id of the user who updates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal auditing"
+        }
+      },
+      {
+        "name": "create_time",
+        "description": "create time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System metadata"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "update_time",
+        "description": "update time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System metadata"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "user_id",
+        "description": "Foreign key referencing the user who owns the flashcard.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Data ownership"
+        }
+      },
+      {
+        "name": "question",
+        "description": "The question text on the flashcard.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "User content"
+        }
+      },
+      {
+        "name": "answer",
+        "description": "The answer text on the flashcard.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "User content"
+        }
+      },
+      {
+        "name": "subject",
+        "description": "The subject category of the flashcard.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Content classification"
+        }
+      },
+      {
+        "name": "topic",
+        "description": "The specific topic within the subject.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Content classification"
+        }
+      },
+      {
+        "name": "creation_date",
+        "description": "Date the flashcard was created.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Metadata"
+        },
+        "format": "timestamp"
+      }
+    ],
+    "indexes": [
+      {
+        "fields": [
+          "id"
+        ],
+        "unique": true,
+        "primary": true,
+        "order": false
+      },
+      {
+        "fields": [
+          "user_id"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "data_creator"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "data_updater"
+        ],
+        "order": false
+      }
+    ],
+    "relations": [
+      {
+        "referencing_fields": [
+          "user_id"
+        ],
+        "referenced_entity": {
+          "name": "user"
+        },
+        "referenced_fields": [
+          "id"
+        ],
+        "cascade": true
+      }
+    ]
+  },
+  "task": {
+    "id": "6938e05c60b30fd313d1ecfa",
+    "root": "6938e05c60b30fd313d1ecfa",
+    "project": "6938e05c60b30fd313d1ecf9",
+    "user": "58f1e300-90d1-70cc-bada-f4dfacd9449e"
+  },
+  "namespace": {
+    "id": "01987547fc6c72ecb453bd2736bd4ea0",
+    "tenant": 2,
+    "name": "global-1",
+    "default": true
+  },
+  "revision": 1
+}

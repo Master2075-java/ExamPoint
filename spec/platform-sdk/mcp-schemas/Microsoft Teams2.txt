@@ -1,0 +1,110 @@
+Mcp name: "Microsoft Teams"
+Mcp id: "686de4146fd1cae1afbb55b7"
+Mcp url: "https://backend.composio.dev/v3/mcp/d2f45247-547e-4ef6-a700-ed8fd05eca0d/mcp?user_id=6938e05c60b30fd313d1ecf9"
+Schema info:
+Tool Name: MICROSOFT_TEAMS_TEAMS_LIST_PEOPLE
+
+Here is the input and output schema info of Tool MICROSOFT_TEAMS_TEAMS_LIST_PEOPLE of Mcp Microsoft Teams (Mcp Id: 686de4146fd1cae1afbb55b7):
+inputSchema:
+{"type":"object","properties":{"filter":{"type":"string","description":"OData $filter query to limit results (e.g., `\"startsWith(displayName,'A')\"`).","title":"Filter","default":null,"nullable":true,"examples":["startsWith(displayName,'J')","jobTitle eq 'Software Engineer'","personType/class eq 'Person' and personType/subclass eq 'OrganizationUser'"]},"orderby":{"type":"string","description":"OData $orderby expression to sort results (e.g., 'displayName asc, relevanceScore desc').","title":"Orderby","default":null,"nullable":true,"examples":["displayName asc","surname desc","relevanceScore desc"]},"search":{"type":"string","description":"Fuzzy search query (name, email, or topic like 'topic:marketing'). Effective only when `user_id` is 'me'.","title":"Search","default":null,"nullable":true,"examples":["John Doe","topic:Sales","johndoe@example.com","\"Maria Rossi\""]},"select":{"type":"string","description":"Comma-separated OData property names to include for each person (e.g., 'id,displayName'). If unspecified, a default set is returned.","title":"Select","default":null,"nullable":true,"examples":["id,displayName","givenName,surname,emailAddresses","id,displayName,scoredEmailAddresses"]},"skip":{"type":"integer","description":"Number of items to skip for pagination.","title":"Skip","default":null,"nullable":true,"examples":["0","10","20"]},"top":{"type":"integer","description":"Maximum number of items per page for pagination. Actual count may be less. Service default if unspecified.","title":"Top","default":null,"nullable":true,"examples":["10","25","50"]},"user_id":{"type":"string","description":"Identifier of the user (e.g., 'me', 'adelev@contoso.com', or GUID) whose relevant people are to be retrieved.","title":"User Id","default":"me","examples":["me","adelev@contoso.com","00000000-0000-0000-0000-000000000000"]}},"title":"ListPeopleRequest"}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"response_data":{"type":"object","description":"A dictionary representing the complete JSON response received from the People API. The structure of this dictionary will conform to the Microsoft Graph API's standard response format for collections, typically including a 'value' key containing an array of person objects and potentially an '@odata.nextLink' key for pagination if there are more results.","title":"Response Data","additionalProperties":true}},"required":["response_data"],"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"ListPeopleResponseWrapper"}
+schema info of MICROSOFT_TEAMS_TEAMS_LIST_PEOPLE ends.
+
+
+Mcp name: "Microsoft Teams"
+Mcp id: "686de4146fd1cae1afbb55b7"
+Mcp url: "https://backend.composio.dev/v3/mcp/d2f45247-547e-4ef6-a700-ed8fd05eca0d/mcp?user_id=6938e05c60b30fd313d1ecf9"
+Schema info:
+Tool Name: MICROSOFT_TEAMS_TEAMS_POST_CHANNEL_MESSAGE
+
+Here is the input and output schema info of Tool MICROSOFT_TEAMS_TEAMS_POST_CHANNEL_MESSAGE of Mcp Microsoft Teams (Mcp Id: 686de4146fd1cae1afbb55b7):
+inputSchema:
+{"type":"object","properties":{"channel_id":{"type":"string","description":"The unique identifier of the channel within the specified team where the message will be posted.","title":"Channel Id"},"content":{"type":"string","description":"The content of the message to be sent. Can be plain text or HTML, determined by `content_type`.","title":"Content"},"content_type":{"type":"string","description":"The format of the message content. Supported values: 'text' (plain text) or 'html' (HTML content). Defaults to 'text'.","title":"Content Type","default":"text","examples":["text","html"]},"team_id":{"type":"string","description":"The unique identifier of the Microsoft Teams team containing the channel.","title":"Team Id"}},"required":["team_id","channel_id","content"],"title":"PostChannelMessageRequest"}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"body":{"type":"object","description":"An object representing the body of the sent message, typically including its `content` and `contentType`.","title":"Body","additionalProperties":true},"createdDateTime":{"type":"string","description":"The UTC timestamp indicating when the message was created.","title":"Created Date Time"},"from":{"type":"object","description":"An object containing details about the message sender (user or application).","title":"From","additionalProperties":true},"id":{"type":"string","description":"The unique identifier of the message successfully posted to the channel.","title":"Id"}},"required":["id","body","from","createdDateTime"],"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"PostChannelMessageResponseWrapper"}
+schema info of MICROSOFT_TEAMS_TEAMS_POST_CHANNEL_MESSAGE ends.
+
+
+Mcp name: "Microsoft Teams"
+Mcp id: "686de4146fd1cae1afbb55b7"
+Mcp url: "https://backend.composio.dev/v3/mcp/d2f45247-547e-4ef6-a700-ed8fd05eca0d/mcp?user_id=6938e05c60b30fd313d1ecf9"
+Schema info:
+Tool Name: MICROSOFT_TEAMS_TEAMS_POST_CHAT_MESSAGE
+
+Here is the input and output schema info of Tool MICROSOFT_TEAMS_TEAMS_POST_CHAT_MESSAGE of Mcp Microsoft Teams (Mcp Id: 686de4146fd1cae1afbb55b7):
+inputSchema:
+{"type":"object","properties":{"chat_id":{"type":"string","description":"Unique identifier for the Microsoft Teams chat to receive the message.","title":"Chat Id","examples":["19:meeting_NTg0NTQ2YjctMDJkNi00M2U3LWFkNmQtN2U4MDVmYjE0MDc5@thread.v2"]},"content":{"type":"string","description":"Message content, either plain text or HTML (see `content_type`).","title":"Content","examples":["Hello world!","<h1>Hello</h1><p>This is a test message with HTML.</p>"]},"content_type":{"type":"string","description":"Content format: 'text' (plain) or 'html'.","title":"Content Type","default":"text","examples":["text","html"]}},"required":["chat_id","content"],"title":"PostChatMessageRequest"}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"body":{"type":"object","description":"Posted message content, including its type and the content string.","title":"Body","additionalProperties":true},"createdDateTime":{"type":"string","description":"UTC timestamp of when the message was created.","title":"Created Date Time"},"from":{"type":"object","description":"Details of the message sender.","title":"From","additionalProperties":true},"id":{"type":"string","description":"Unique identifier of the posted message.","title":"Id"}},"required":["id","body","from","createdDateTime"],"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"PostChatMessageResponseWrapper"}
+schema info of MICROSOFT_TEAMS_TEAMS_POST_CHAT_MESSAGE ends.
+
+
+Mcp name: "Microsoft Teams"
+Mcp id: "686de4146fd1cae1afbb55b7"
+Mcp url: "https://backend.composio.dev/v3/mcp/d2f45247-547e-4ef6-a700-ed8fd05eca0d/mcp?user_id=6938e05c60b30fd313d1ecf9"
+Schema info:
+Tool Name: MICROSOFT_TEAMS_TEAMS_POST_MESSAGE_REPLY
+
+Here is the input and output schema info of Tool MICROSOFT_TEAMS_TEAMS_POST_MESSAGE_REPLY of Mcp Microsoft Teams (Mcp Id: 686de4146fd1cae1afbb55b7):
+inputSchema:
+{"type":"object","properties":{"channel_id":{"type":"string","description":"The unique identifier of the channel within the specified team. This channel contains the message to which the reply will be posted. Channel IDs typically follow a format like '19:{alphanumeric_string}@thread.tacv2'.","title":"Channel Id","examples":["19:general@thread.tacv2","19:c2fd609a5db440179d7400e0a8ac9ac2@thread.tacv2"]},"content":{"type":"string","description":"The body of the reply message. This can be plain text or HTML, as specified by the `content_type` field.","title":"Content","examples":["Acknowledged.","Sure, I will look into this.","<p>Thank you for the update!</p>"]},"content_type":{"type":"string","description":"Specifies the format of the `content` field. Accepted values are 'text' for plain text content and 'html' for content with HTML formatting. Defaults to 'text' if not provided.","title":"Content Type","default":"text","examples":["text","html"]},"message_id":{"type":"string","description":"The unique identifier of the specific message within the channel to which this reply is directed.","title":"Message Id","examples":["1611900000000","AAMkAGI2NDkxZjRjLTFkYjEtNGZkYy04YjU0LTQ2Mjk0ZTk1YjJjZQBGAAAAAAD0kR8xYjRKVp8SMVFlz36QBwBfsGR1cASTRI8xY238WZJ3AAAAAAEMAABfsGR1cASTRI8xY238WZJ3AAAAAAEkAAA="]},"team_id":{"type":"string","description":"The unique identifier (GUID) of the Microsoft Teams team that contains the channel where the message to be replied to exists.","title":"Team Id","examples":["fbe2bf47-16c8-47cf-b4a5-4b9b187c508b"]}},"required":["team_id","channel_id","message_id","content"],"title":"PostMessageReplyRequest"}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"body":{"type":"object","description":"An object representing the content of the reply message, typically containing `contentType` (e.g., 'text', 'html') and `content` (the actual message string).","title":"Body","additionalProperties":true},"createdDateTime":{"type":"string","description":"The Coordinated Universal Time (UTC) timestamp indicating when the reply message was successfully created. The format is ISO 8601.","title":"Created Date Time"},"from":{"type":"object","description":"A dictionary containing details about the sender of the reply. This often includes user or application information.","title":"From","additionalProperties":true},"id":{"type":"string","description":"The unique identifier (ID) assigned to the newly created reply message by Microsoft Teams.","title":"Id"}},"required":["id","body","from","createdDateTime"],"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"PostMessageReplyResponseWrapper"}
+schema info of MICROSOFT_TEAMS_TEAMS_POST_MESSAGE_REPLY ends.
+
+
+Mcp name: "Microsoft Teams"
+Mcp id: "686de4146fd1cae1afbb55b7"
+Mcp url: "https://backend.composio.dev/v3/mcp/d2f45247-547e-4ef6-a700-ed8fd05eca0d/mcp?user_id=6938e05c60b30fd313d1ecf9"
+Schema info:
+Tool Name: MICROSOFT_TEAMS_UNARCHIVE_TEAM
+
+Here is the input and output schema info of Tool MICROSOFT_TEAMS_UNARCHIVE_TEAM of Mcp Microsoft Teams (Mcp Id: 686de4146fd1cae1afbb55b7):
+inputSchema:
+{"type":"object","properties":{"team_id":{"type":"string","description":"The unique identifier (GUID) of the team to unarchive.","title":"Team Id","examples":["f47ac10b-58cc-4372-a567-0e02b2c3d479"]}},"required":["team_id"],"title":"UnarchiveTeamRequest","description":"Request schema to unarchive a Microsoft Teams team."}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"status_code":{"type":"integer","description":"HTTP status code returned by the unarchive operation. 204 indicates success.","title":"Status Code"}},"required":["status_code"],"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"UnarchiveTeamResponseWrapper"}
+schema info of MICROSOFT_TEAMS_UNARCHIVE_TEAM ends.
+
+
+Mcp name: "Microsoft Teams"
+Mcp id: "686de4146fd1cae1afbb55b7"
+Mcp url: "https://backend.composio.dev/v3/mcp/d2f45247-547e-4ef6-a700-ed8fd05eca0d/mcp?user_id=6938e05c60b30fd313d1ecf9"
+Schema info:
+Tool Name: MICROSOFT_TEAMS_UPDATE_CHANNEL_MESSAGE
+
+Here is the input and output schema info of Tool MICROSOFT_TEAMS_UPDATE_CHANNEL_MESSAGE of Mcp Microsoft Teams (Mcp Id: 686de4146fd1cae1afbb55b7):
+inputSchema:
+{"type":"object","properties":{"channel_id":{"type":"string","description":"Unique identifier of the channel within the team.","title":"Channel Id","examples":["19:abcdef1234567890@thread.tacv2"]},"content":{"type":"string","description":"Updated message content, either plain text or HTML.","title":"Content","examples":["Updated project details."]},"content_type":{"type":"string","description":"Format of the message content: 'text' or 'html'.","title":"Content Type","default":"text","examples":["text","html"]},"message_id":{"type":"string","description":"Unique identifier of the channel message to update.","title":"Message Id","examples":["1593478509446"]},"team_id":{"type":"string","description":"Unique identifier of the Microsoft Teams team.","title":"Team Id","examples":["12345678-90ab-cdef-1234-567890abcdef"]}},"required":["team_id","channel_id","message_id","content"],"title":"UpdateChannelMessageRequest"}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"status_code":{"type":"integer","description":"HTTP status code returned by the update operation.","title":"Status Code"}},"required":["status_code"],"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"UpdateChannelMessageResponseWrapper"}
+schema info of MICROSOFT_TEAMS_UPDATE_CHANNEL_MESSAGE ends.
+
+
+Mcp name: "Microsoft Teams"
+Mcp id: "686de4146fd1cae1afbb55b7"
+Mcp url: "https://backend.composio.dev/v3/mcp/d2f45247-547e-4ef6-a700-ed8fd05eca0d/mcp?user_id=6938e05c60b30fd313d1ecf9"
+Schema info:
+Tool Name: MICROSOFT_TEAMS_UPDATE_CHAT_MESSAGE
+
+Here is the input and output schema info of Tool MICROSOFT_TEAMS_UPDATE_CHAT_MESSAGE of Mcp Microsoft Teams (Mcp Id: 686de4146fd1cae1afbb55b7):
+inputSchema:
+{"type":"object","properties":{"chat_id":{"type":"string","description":"Unique identifier of the Microsoft Teams chat.","title":"Chat Id","examples":["19:meeting_NTg0NTQ2YjctMDJkNi00M2U3LWFkNmQtN2U4MDVmYjE0MDc5@thread.v2"]},"content":{"type":"string","description":"Updated message content, either plain text or HTML.","title":"Content","examples":["Updated the details of the meeting."]},"content_type":{"type":"string","description":"Format of the message content: 'text' or 'html'.","title":"Content Type","default":"text","examples":["text","html"]},"message_id":{"type":"string","description":"Unique identifier of the chat message to update.","title":"Message Id","examples":["1593478509446"]}},"required":["chat_id","message_id","content"],"title":"UpdateChatMessageRequest"}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"status_code":{"type":"integer","description":"HTTP status code returned by the update operation.","title":"Status Code"}},"required":["status_code"],"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"UpdateChatMessageResponseWrapper"}
+schema info of MICROSOFT_TEAMS_UPDATE_CHAT_MESSAGE ends.
+
+
+Mcp name: "Microsoft Teams"
+Mcp id: "686de4146fd1cae1afbb55b7"
+Mcp url: "https://backend.composio.dev/v3/mcp/d2f45247-547e-4ef6-a700-ed8fd05eca0d/mcp?user_id=6938e05c60b30fd313d1ecf9"
+Schema info:
+Tool Name: MICROSOFT_TEAMS_UPDATE_TEAM
+
+Here is the input and output schema info of Tool MICROSOFT_TEAMS_UPDATE_TEAM of Mcp Microsoft Teams (Mcp Id: 686de4146fd1cae1afbb55b7):
+inputSchema:
+{"type":"object","properties":{"funSettings":{"type":"object","description":"Settings that control fun features in the team.","title":"TeamFunSettings","default":null,"nullable":true,"properties":{"allowGiphy":{"type":"boolean","description":"Whether Giphy is allowed.","title":"Allow Giphy"},"giphyContentRating":{"type":"string","description":"The content rating for Giphy: 'strict' or 'moderate'.","title":"Giphy Content Rating","enum":["strict","moderate"]}},"required":["allowGiphy","giphyContentRating"],"additionalProperties":false},"memberSettings":{"type":"object","description":"Settings that control what members can do in the team.","title":"TeamMemberSettings","default":null,"nullable":true,"properties":{"allowCreateUpdateChannels":{"type":"boolean","description":"Whether members are allowed to create and update channels in the team.","title":"Allow Create Update Channels"}},"required":["allowCreateUpdateChannels"],"additionalProperties":false},"messagingSettings":{"type":"object","description":"Settings that control messaging capabilities in the team.","title":"TeamMessagingSettings","default":null,"nullable":true,"properties":{"allowUserDeleteMessages":{"type":"boolean","description":"Whether users are allowed to delete their messages.","title":"Allow User Delete Messages"},"allowUserEditMessages":{"type":"boolean","description":"Whether users are allowed to edit their messages.","title":"Allow User Edit Messages"}},"required":["allowUserEditMessages","allowUserDeleteMessages"],"additionalProperties":false},"team_id":{"type":"string","description":"The unique identifier (GUID) of the team to update.","title":"Team Id","examples":["f47ac10b-58cc-4372-a567-0e02b2c3d479"]}},"required":["team_id"],"title":"UpdateTeamRequest","description":"Request payload to update properties of a Microsoft Teams team."}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"status_code":{"type":"integer","description":"HTTP status code returned by the update operation. 204 indicates success.","title":"Status Code"}},"required":["status_code"],"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"UpdateTeamResponseWrapper"}
+schema info of MICROSOFT_TEAMS_UPDATE_TEAM ends.

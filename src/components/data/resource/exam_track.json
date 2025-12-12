@@ -1,0 +1,176 @@
+{
+  "id": "102019b0630795c7487b9eaf9bcdf3ca266",
+  "version": "102019b1079416a7e66b70c0ffc100c7a0c",
+  "schema": {
+    "name": "exam_track",
+    "description": "Specific exam tracks users are preparing for.",
+    "fields": [
+      {
+        "name": "id",
+        "description": "Unique identifier for the exam track.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System identifier"
+        }
+      },
+      {
+        "name": "data_creator",
+        "description": "id of the user who creates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal auditing"
+        }
+      },
+      {
+        "name": "data_updater",
+        "description": "id of the user who updates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal auditing"
+        }
+      },
+      {
+        "name": "create_time",
+        "description": "create time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System metadata"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "update_time",
+        "description": "update time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System metadata"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "user_id",
+        "description": "Foreign key referencing the user.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Data ownership"
+        }
+      },
+      {
+        "name": "exam_type",
+        "description": "The type of exam (SAT, ACT, etc.).",
+        "type": 100,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "User preference"
+        },
+        "enumeration": [
+          {
+            "value": "Unspecified"
+          },
+          {
+            "number": 1,
+            "value": "SAT"
+          },
+          {
+            "number": 2,
+            "value": "ACT"
+          },
+          {
+            "number": 3,
+            "value": "AP"
+          },
+          {
+            "number": 4,
+            "value": "School"
+          }
+        ]
+      },
+      {
+        "name": "subject_list",
+        "description": "List of subjects included in this exam track.",
+        "type": 101,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "User preference"
+        },
+        "items": {
+          "type": 1,
+          "taxonomy": {
+            "category": "education",
+            "subject": "subject_name"
+          }
+        }
+      },
+      {
+        "name": "active_status",
+        "description": "Whether this exam track is currently active for the user.",
+        "type": 3,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "User state"
+        }
+      }
+    ],
+    "indexes": [
+      {
+        "fields": [
+          "id"
+        ],
+        "unique": true,
+        "primary": true,
+        "order": false
+      },
+      {
+        "fields": [
+          "user_id"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "data_creator"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "data_updater"
+        ],
+        "order": false
+      }
+    ],
+    "relations": [
+      {
+        "referencing_fields": [
+          "user_id"
+        ],
+        "referenced_entity": {
+          "name": "user"
+        },
+        "referenced_fields": [
+          "id"
+        ],
+        "cascade": true
+      }
+    ]
+  },
+  "task": {
+    "id": "693b83460b35e4b62b0f24d1",
+    "root": "6938e05c60b30fd313d1ecfa",
+    "project": "6938e05c60b30fd313d1ecf9",
+    "user": "58f1e300-90d1-70cc-bada-f4dfacd9449e"
+  },
+  "namespace": {
+    "id": "01987547fc6c72ecb453bd2736bd4ea0",
+    "tenant": 2,
+    "name": "global-1",
+    "default": true
+  },
+  "revision": 1
+}

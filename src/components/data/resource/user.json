@@ -1,0 +1,179 @@
+{
+  "id": "102019b0630795c7687ab8af37de757826c",
+  "version": "102019b1079416a7e66b70c0ffc100c7a0c",
+  "schema": {
+    "name": "user",
+    "description": "Stores user account information including authentication and subscription status.",
+    "fields": [
+      {
+        "name": "id",
+        "description": "Unique identifier for the user.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Public identifier"
+        }
+      },
+      {
+        "name": "data_creator",
+        "description": "id of the user who creates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal auditing"
+        }
+      },
+      {
+        "name": "data_updater",
+        "description": "id of the user who updates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal auditing"
+        }
+      },
+      {
+        "name": "create_time",
+        "description": "create time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System metadata"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "update_time",
+        "description": "update time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System metadata"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "email",
+        "description": "User email address used for login.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 3,
+          "reason": "PII"
+        },
+        "pattern": "^[^@]+@[^@]+\\.[^@]+$",
+        "format": "email"
+      },
+      {
+        "name": "password_hash",
+        "description": "Hashed password for authentication.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 4,
+          "reason": "Authentication secret"
+        },
+        "encryption": true,
+        "format": "password"
+      },
+      {
+        "name": "subscription_tier",
+        "description": "Current subscription level of the user.",
+        "type": 100,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Business logic"
+        },
+        "enumeration": [
+          {
+            "value": "Unspecified"
+          },
+          {
+            "number": 1,
+            "value": "Basic"
+          },
+          {
+            "number": 2,
+            "value": "Elite"
+          }
+        ]
+      },
+      {
+        "name": "subscription_status",
+        "description": "Status of the user's subscription.",
+        "type": 100,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Business logic"
+        },
+        "enumeration": [
+          {
+            "value": "Unspecified"
+          },
+          {
+            "number": 1,
+            "value": "Active"
+          },
+          {
+            "number": 2,
+            "value": "Inactive"
+          },
+          {
+            "number": 3,
+            "value": "Cancelled"
+          }
+        ]
+      },
+      {
+        "name": "registration_date",
+        "description": "Date when the user registered.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Account metadata"
+        },
+        "format": "timestamp"
+      }
+    ],
+    "indexes": [
+      {
+        "fields": [
+          "id"
+        ],
+        "unique": true,
+        "primary": true,
+        "order": false
+      },
+      {
+        "fields": [
+          "email"
+        ],
+        "unique": true,
+        "order": false
+      },
+      {
+        "fields": [
+          "data_creator"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "data_updater"
+        ],
+        "order": false
+      }
+    ]
+  },
+  "task": {
+    "id": "693b83460b35e4b62b0f24d1",
+    "root": "6938e05c60b30fd313d1ecfa",
+    "project": "6938e05c60b30fd313d1ecf9",
+    "user": "58f1e300-90d1-70cc-bada-f4dfacd9449e"
+  },
+  "namespace": {
+    "id": "01987547fc6c72ecb453bd2736bd4ea0",
+    "tenant": 2,
+    "name": "global-1",
+    "default": true
+  },
+  "revision": 1
+}

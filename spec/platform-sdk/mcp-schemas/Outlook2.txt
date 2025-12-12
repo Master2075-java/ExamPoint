@@ -1,0 +1,138 @@
+Mcp name: "Outlook"
+Mcp id: "686de43c6fd1cae1afbb55b8"
+Mcp url: "https://backend.composio.dev/v3/mcp/bdc2858f-b37e-4709-9b88-f510ab98c13a/mcp?user_id=6938e05c60b30fd313d1ecf9"
+Schema info:
+Tool Name: OUTLOOK_OUTLOOK_CREATE_CONTACT
+
+Here is the input and output schema info of Tool OUTLOOK_OUTLOOK_CREATE_CONTACT of Mcp Outlook (Mcp Id: 686de43c6fd1cae1afbb55b8):
+inputSchema:
+{"type":"object","properties":{"birthday":{"type":"string","description":"The contact's birthday in 'YYYY-MM-DD' format. The time component will be set to midnight UTC (e.g., '1990-01-01' becomes '1990-01-01T00:00:00Z' in the API request).","title":"Birthday","default":"","examples":["1990-01-01"]},"businessPhones":{"type":"array","description":"A list of business phone numbers for the contact. Each number should be a string.","title":"Business Phones","items":{"type":"string","properties":{}},"examples":["+1 555 555 5555"]},"categories":{"type":"array","description":"A list of categories to assign to the contact.","title":"Categories","items":{"type":"string","properties":{}},"examples":["Friend","Colleague"]},"companyName":{"type":"string","description":"The name of the company the contact is associated with.","title":"Company Name","default":"","examples":["Example Corp"]},"department":{"type":"string","description":"The department the contact belongs to within their company.","title":"Department","default":"","examples":["Engineering"]},"displayName":{"type":"string","description":"The contact's display name, typically their full name.","title":"Display Name","default":"","examples":["Jane Doe"]},"emailAddresses":{"type":"array","description":"A list of email addresses for the contact.","title":"Email Addresses","items":{"type":"object","title":"EmailAddress","properties":{"address":{"type":"string","description":"The contact's email address.","title":"Address","examples":["jane.doe@example.com"]},"name":{"type":"string","description":"The display name for the contact's email address.","title":"Name","default":"","examples":["Jane Doe"]}},"required":["address"]}},"givenName":{"type":"string","description":"The contact's given (first) name.","title":"Given Name","default":"","examples":["Jane"]},"homePhone":{"type":"string","description":"The contact's home phone number. If provided, this will be stored in Outlook as a list containing this single number.","title":"Home Phone","default":"","examples":["+1 555 555 5557"]},"jobTitle":{"type":"string","description":"The contact's job title.","title":"Job Title","default":"","examples":["Software Engineer"]},"mobilePhone":{"type":"string","description":"The contact's mobile phone number.","title":"Mobile Phone","default":"","examples":["+1 555 555 5556"]},"notes":{"type":"string","description":"Personal notes about the contact. These notes are stored as 'personalNotes' in the Outlook contact details.","title":"Notes","default":"","examples":["Met at the 2023 Tech Conference."]},"officeLocation":{"type":"string","description":"The contact's office location.","title":"Office Location","default":"","examples":["Building 1, Room 101"]},"surname":{"type":"string","description":"The contact's surname (last name).","title":"Surname","default":"","examples":["Doe"]},"user_id":{"type":"string","description":"Identifier for the user whose contact list will be modified. Use 'me' for the authenticated user, or provide the user's principal name (e.g., 'user@example.com').","title":"User Id","default":"me"}},"title":"CreateContactRequest"}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"contact_id":{"type":"string","description":"The unique ID of the newly created Outlook contact.","title":"Contact Id"},"message":{"type":"string","description":"A confirmation message indicating the outcome of the contact creation operation, typically 'Contact created successfully.'.","title":"Message"}},"required":["message","contact_id"],"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"CreateContactResponseWrapper"}
+schema info of OUTLOOK_OUTLOOK_CREATE_CONTACT ends.
+
+
+Mcp name: "Outlook"
+Mcp id: "686de43c6fd1cae1afbb55b8"
+Mcp url: "https://backend.composio.dev/v3/mcp/bdc2858f-b37e-4709-9b88-f510ab98c13a/mcp?user_id=6938e05c60b30fd313d1ecf9"
+Schema info:
+Tool Name: OUTLOOK_OUTLOOK_CREATE_DRAFT
+
+Here is the input and output schema info of Tool OUTLOOK_OUTLOOK_CREATE_DRAFT of Mcp Outlook (Mcp Id: 686de43c6fd1cae1afbb55b8):
+inputSchema:
+{"type":"object","properties":{"attachment":{"title":"FileUploadable","description":"Optional file to attach. If provided, must include the file's content, name, and mimetype.","format":"path","type":"string","file_uploadable":true},"bcc_recipients":{"type":"array","description":"Optional list of BCC (blind carbon copy) recipient email addresses.","title":"Bcc Recipients","default":[],"items":{"type":"string","properties":{}},"examples":[["stakeholder@example.com"]]},"body":{"type":"string","description":"Content of the email draft; use `is_html` to specify if HTML or plain text.","title":"Body","examples":["Let's meet to discuss the project."]},"cc_recipients":{"type":"array","description":"Optional list of CC (carbon copy) recipient email addresses.","title":"Cc Recipients","default":[],"items":{"type":"string","properties":{}},"examples":[["manager@example.com"]]},"conversation_id":{"type":"string","description":"Optional conversation ID to create the draft as part of an existing email conversation thread. If provided, the draft will be part of the specified conversation instead of starting a new one.","title":"Conversation Id","default":null,"nullable":true,"examples":["AAQkAGI2NGNjOTExLTg0Y2ItNGIzYi05Y2Q0LWEwY2I4YWI1N2I4MQAQAMiRK4HaTUGVgCcBVBr5p3g="]},"is_html":{"type":"boolean","description":"Specifies if the `body` is HTML. If `False`, `body` is plain text.","title":"Is Html","default":false},"subject":{"type":"string","description":"Subject line for the email draft.","title":"Subject","minLength":1,"maxLength":255,"examples":["Team Meeting"]},"to_recipients":{"type":"array","description":"List of primary 'To' recipient email addresses.","title":"To Recipients","items":{"type":"string","properties":{}},"examples":[["johndoe@example.com","janedoe@example.com"]]}},"required":["subject","body","to_recipients"],"title":"CreateEmailDraftRequest"}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"response_data":{"type":"object","description":"A dictionary containing the response from the Microsoft Graph API upon successful creation of the email draft. This typically includes details of the created draft, such as its ID, subject, and recipients. If an attachment was part of the request, its `contentBytes` field in this response will be replaced with the placeholder string '[BASE64_CONTENT_REMOVED]'.","title":"Response Data","default":{},"additionalProperties":true}},"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"CreateEmailDraftResponseWrapper"}
+schema info of OUTLOOK_OUTLOOK_CREATE_DRAFT ends.
+
+
+Mcp name: "Outlook"
+Mcp id: "686de43c6fd1cae1afbb55b8"
+Mcp url: "https://backend.composio.dev/v3/mcp/bdc2858f-b37e-4709-9b88-f510ab98c13a/mcp?user_id=6938e05c60b30fd313d1ecf9"
+Schema info:
+Tool Name: OUTLOOK_OUTLOOK_CREATE_DRAFT_REPLY
+
+Here is the input and output schema info of Tool OUTLOOK_OUTLOOK_CREATE_DRAFT_REPLY of Mcp Outlook (Mcp Id: 686de43c6fd1cae1afbb55b8):
+inputSchema:
+{"type":"object","properties":{"bcc_emails":{"type":"array","description":"List of email addresses to add as BCC recipients to the draft reply.","title":"Bcc Emails","default":[],"items":{"type":"string","properties":{}},"examples":[["manager@example.com","supervisor@example.com"]]},"cc_emails":{"type":"array","description":"List of email addresses to add as CC recipients to the draft reply.","title":"Cc Emails","default":[],"items":{"type":"string","properties":{}},"examples":[["jane.doe@example.com","other@example.com"]]},"comment":{"type":"string","description":"Plain text comment to include in the body of the reply draft.","title":"Comment","default":null,"nullable":true,"examples":["Thank you for your email. I'll review and respond shortly."]},"message_id":{"type":"string","description":"Unique ID of the message to reply to, typically obtained from actions like 'List Messages' or 'Get Message'.","title":"Message Id","examples":["AAMkAGI2TAAA="]},"user_id":{"type":"string","description":"User's mailbox identifier (email or 'me') for the original message and new draft location.","title":"User Id","default":"me","examples":["me","john.doe@example.com"]}},"required":["message_id"],"title":"CreateDraftReplyRequest"}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"response_data":{"type":"object","description":"Detailed information of the created draft message, including ID, subject, recipients, and body, as returned by the Microsoft Graph API.","title":"Response Data","additionalProperties":true}},"required":["response_data"],"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"CreateDraftReplyResponseWrapper"}
+schema info of OUTLOOK_OUTLOOK_CREATE_DRAFT_REPLY ends.
+
+
+Mcp name: "Outlook"
+Mcp id: "686de43c6fd1cae1afbb55b8"
+Mcp url: "https://backend.composio.dev/v3/mcp/bdc2858f-b37e-4709-9b88-f510ab98c13a/mcp?user_id=6938e05c60b30fd313d1ecf9"
+Schema info:
+Tool Name: OUTLOOK_OUTLOOK_DELETE_CONTACT
+
+Here is the input and output schema info of Tool OUTLOOK_OUTLOOK_DELETE_CONTACT of Mcp Outlook (Mcp Id: 686de43c6fd1cae1afbb55b8):
+inputSchema:
+{"type":"object","properties":{"contact_id":{"type":"string","description":"Identifier of the contact to be deleted, typically obtained from 'List User Contacts' or 'Get Contact'.","title":"Contact Id","examples":["AAMkAGViNGRjYTkEtcAAA=","AAMkADcLjUyMQUtZTFlOC00NzU0LTk3ZWMtZTA3NGQ4ZWI1N2YyAAAA="]},"user_id":{"type":"string","description":"The UPN (User Principal Name) or ID of the user; use 'me' for the signed-in user.","title":"User Id","default":"me","examples":["me","user@example.com","a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6"]}},"required":["contact_id"],"title":"DeleteContactRequest"}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"response_data":{"type":"object","description":"An empty dictionary returned upon successful deletion of the contact, confirming the operation's success.","title":"Response Data","additionalProperties":true}},"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"DeleteContactResponseWrapper"}
+schema info of OUTLOOK_OUTLOOK_DELETE_CONTACT ends.
+
+
+Mcp name: "Outlook"
+Mcp id: "686de43c6fd1cae1afbb55b8"
+Mcp url: "https://backend.composio.dev/v3/mcp/bdc2858f-b37e-4709-9b88-f510ab98c13a/mcp?user_id=6938e05c60b30fd313d1ecf9"
+Schema info:
+Tool Name: OUTLOOK_OUTLOOK_DELETE_EVENT
+
+Here is the input and output schema info of Tool OUTLOOK_OUTLOOK_DELETE_EVENT of Mcp Outlook (Mcp Id: 686de43c6fd1cae1afbb55b8):
+inputSchema:
+{"type":"object","properties":{"event_id":{"type":"string","description":"Unique identifier of the calendar event to delete, typically obtained from event listing or retrieval actions.","title":"Event Id","examples":["AAMkAGI2TAAA="]},"send_notifications":{"type":"boolean","description":"If `True`, sends cancellation notifications to event attendees upon deletion.","title":"Send Notifications","default":true,"examples":["True","False"]},"user_id":{"type":"string","description":"User's email address or 'me' for the current user.","title":"User Id","default":"me","examples":["me","specific_user@example.com"]}},"required":["event_id"],"title":"DeleteEventRequest"}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"response_data":{"type":"object","description":"API response, typically empty for successful deletions (204 No Content).","title":"Response Data","additionalProperties":true}},"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"DeleteEventResponseWrapper"}
+schema info of OUTLOOK_OUTLOOK_DELETE_EVENT ends.
+
+
+Mcp name: "Outlook"
+Mcp id: "686de43c6fd1cae1afbb55b8"
+Mcp url: "https://backend.composio.dev/v3/mcp/bdc2858f-b37e-4709-9b88-f510ab98c13a/mcp?user_id=6938e05c60b30fd313d1ecf9"
+Schema info:
+Tool Name: OUTLOOK_OUTLOOK_GET_CONTACT
+
+Here is the input and output schema info of Tool OUTLOOK_OUTLOOK_GET_CONTACT of Mcp Outlook (Mcp Id: 686de43c6fd1cae1afbb55b8):
+inputSchema:
+{"type":"object","properties":{"contact_id":{"type":"string","description":"Unique identifier for the contact within the specified user's Outlook address book.","title":"Contact Id","examples":["AAMkAGI2TAAA="]},"user_id":{"type":"string","description":"User's principal name (e.g., 'AdeleV@contoso.onmicrosoft.com') or 'me' for the authenticated user. Using 'me' is recommended for accessing one's own contacts.","title":"User Id","default":"me","examples":["me","AdeleV@contoso.onmicrosoft.com"]}},"required":["contact_id"],"title":"GetContactRequest"}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"response_data":{"type":"object","description":"Dictionary containing detailed properties of the retrieved contact, following the Microsoft Graph API's contact resource structure (e.g., 'id', 'displayName', 'emailAddresses').","title":"Response Data","additionalProperties":true}},"required":["response_data"],"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"GetContactResponseWrapper"}
+schema info of OUTLOOK_OUTLOOK_GET_CONTACT ends.
+
+
+Mcp name: "Outlook"
+Mcp id: "686de43c6fd1cae1afbb55b8"
+Mcp url: "https://backend.composio.dev/v3/mcp/bdc2858f-b37e-4709-9b88-f510ab98c13a/mcp?user_id=6938e05c60b30fd313d1ecf9"
+Schema info:
+Tool Name: OUTLOOK_OUTLOOK_GET_CONTACT_FOLDERS
+
+Here is the input and output schema info of Tool OUTLOOK_OUTLOOK_GET_CONTACT_FOLDERS of Mcp Outlook (Mcp Id: 686de43c6fd1cae1afbb55b8):
+inputSchema:
+{"type":"object","properties":{"expand":{"type":"array","description":"Related entities to expand inline, e.g., ['contacts'].","title":"Expand","items":{"type":"string","properties":{}},"examples":[["contacts"]]},"filter":{"type":"string","description":"OData filter expression, e.g., startswith(displayName,'A').","title":"Filter","default":null,"nullable":true,"examples":["startswith(displayName,'A')"]},"orderby":{"type":"array","description":"List of properties to order results by, e.g., ['displayName asc'].","title":"Orderby","items":{"type":"string","properties":{}},"examples":[["displayName asc"]]},"select":{"type":"array","description":"List of properties to include in the response, e.g., ['id','displayName'].","title":"Select","items":{"type":"string","properties":{}},"examples":[["id","displayName"]]},"skip":{"type":"integer","description":"Number of contact folders to skip for pagination.","title":"Skip","default":null,"nullable":true,"minimum":0,"examples":[0,10]},"top":{"type":"integer","description":"Maximum number of contact folders to return.","title":"Top","default":null,"nullable":true,"minimum":1,"examples":[10,50]},"user_id":{"type":"string","description":"User principal name or ID. Use 'me' for the authenticated user.","title":"User Id","default":"me","examples":["me","user@example.com"]}},"title":"GetContactFoldersRequest","description":"Request parameters for retrieving contact folders in a user's mailbox."}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"@odata.nextLink":{"type":"string","description":"URL to fetch the next page of results, if any.","title":"@Odata.Next Link","default":null,"nullable":true},"value":{"type":"array","description":"Collection of contactFolder objects.","title":"Value","items":{"type":"object","description":"Represents a contact folder in the user's mailbox.","title":"ContactFolder","properties":{"childFolderCount":{"type":"integer","description":"Number of child folders under this folder.","title":"Child Folder Count","default":null,"nullable":true,"minimum":0},"displayName":{"type":"string","description":"Display name of the contact folder.","title":"Display Name","examples":["Contacts","Friends"]},"id":{"type":"string","description":"Unique identifier of the contact folder.","title":"Id","examples":["AQMkADIxYjJiYgEzLTFmNjYALTRjYTMtODA1NC0wZDkxZGNmOTcxNTQALgAAAA=="]},"parentFolderId":{"type":"string","description":"ID of the parent folder; null for top-level folders.","title":"Parent Folder Id","default":null,"nullable":true}},"required":["id","displayName"]}}},"required":["value"],"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"GetContactFoldersResponseWrapper"}
+schema info of OUTLOOK_OUTLOOK_GET_CONTACT_FOLDERS ends.
+
+
+Mcp name: "Outlook"
+Mcp id: "686de43c6fd1cae1afbb55b8"
+Mcp url: "https://backend.composio.dev/v3/mcp/bdc2858f-b37e-4709-9b88-f510ab98c13a/mcp?user_id=6938e05c60b30fd313d1ecf9"
+Schema info:
+Tool Name: OUTLOOK_OUTLOOK_GET_EVENT
+
+Here is the input and output schema info of Tool OUTLOOK_OUTLOOK_GET_EVENT of Mcp Outlook (Mcp Id: 686de43c6fd1cae1afbb55b8):
+inputSchema:
+{"type":"object","properties":{"event_id":{"type":"string","description":"The unique identifier of the calendar event to retrieve.","title":"Event Id","examples":["AAMkAGI2TG9tYVyGdUHg=="]},"user_id":{"type":"string","description":"The user's primary SMTP address, user principal name (UPN), or the alias 'me' (for the signed-in user) to identify the calendar owner.","title":"User Id","default":"me","examples":["me","AdeleV@contoso.onmicrosoft.com"]}},"required":["event_id"],"title":"GetEventRequest"}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"response_data":{"type":"object","description":"Complete data for the retrieved calendar event, including properties like subject, body, times, attendees, and organizer.","title":"Response Data","additionalProperties":true}},"required":["response_data"],"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"GetEventResponseWrapper"}
+schema info of OUTLOOK_OUTLOOK_GET_EVENT ends.
+
+
+Mcp name: "Outlook"
+Mcp id: "686de43c6fd1cae1afbb55b8"
+Mcp url: "https://backend.composio.dev/v3/mcp/bdc2858f-b37e-4709-9b88-f510ab98c13a/mcp?user_id=6938e05c60b30fd313d1ecf9"
+Schema info:
+Tool Name: OUTLOOK_OUTLOOK_GET_MESSAGE
+
+Here is the input and output schema info of Tool OUTLOOK_OUTLOOK_GET_MESSAGE of Mcp Outlook (Mcp Id: 686de43c6fd1cae1afbb55b8):
+inputSchema:
+{"type":"object","properties":{"message_id":{"type":"string","description":"Unique ID of the Outlook email message to retrieve.","title":"Message Id","examples":["AAMkAGI2TAAA="]},"select":{"type":"string","description":"Comma-separated list of properties to include. Use 'internetMessageHeaders' to get email headers for filtering automated messages.","title":"Select","default":null,"nullable":true,"examples":["internetMessageHeaders","subject,from,internetMessageHeaders"]},"user_id":{"type":"string","description":"User's email address, UPN, or 'me' for the currently authenticated user.","title":"User Id","default":"me","examples":["me","AdeleV@contoso.onmicrosoft.com"]}},"required":["message_id"],"title":"GetMessageRequest"}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"response_data":{"type":"object","description":"Dictionary with detailed properties of the retrieved email, including sender, recipients, subject, and body, from the Microsoft Graph API.","title":"Response Data","additionalProperties":true}},"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"GetMessageResponseWrapper"}
+schema info of OUTLOOK_OUTLOOK_GET_MESSAGE ends.
+
+
+Mcp name: "Outlook"
+Mcp id: "686de43c6fd1cae1afbb55b8"
+Mcp url: "https://backend.composio.dev/v3/mcp/bdc2858f-b37e-4709-9b88-f510ab98c13a/mcp?user_id=6938e05c60b30fd313d1ecf9"
+Schema info:
+Tool Name: OUTLOOK_OUTLOOK_GET_PROFILE
+
+Here is the input and output schema info of Tool OUTLOOK_OUTLOOK_GET_PROFILE of Mcp Outlook (Mcp Id: 686de43c6fd1cae1afbb55b8):
+inputSchema:
+{"type":"object","properties":{"user_id":{"type":"string","description":"The user's unique identifier or principal name. Use 'me' to get the profile of the authenticated user.","title":"User Id","default":"me","examples":["me","AdeleV@contoso.onmicrosoft.com"]}},"title":"GetProfileRequest"}
+outputSchema:
+{"type":"object","properties":{"data":{"type":"object","description":"Data from the action execution","title":"Data","properties":{"response_data":{"type":"object","description":"A dictionary containing the user's profile information. Common fields include 'id', 'displayName', 'givenName', 'surname', 'mail', 'userPrincipalName', 'jobTitle', 'mobilePhone', and 'officeLocation'. The exact set of fields returned can vary.","title":"Response Data","additionalProperties":true}},"required":["response_data"],"additionalProperties":false},"error":{"type":"string","description":"Error if any occurred during the execution of the action","title":"Error","default":null,"nullable":true},"successful":{"type":"boolean","description":"Whether or not the action execution was successful or not","title":"Successful"}},"required":["data","successful"],"title":"GetProfileResponseWrapper"}
+schema info of OUTLOOK_OUTLOOK_GET_PROFILE ends.

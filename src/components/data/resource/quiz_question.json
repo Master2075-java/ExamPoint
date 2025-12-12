@@ -1,0 +1,157 @@
+{
+  "id": "102019b0630795b79b083b58d3652720065",
+  "version": "102019b1079416a7e66b70c0ffc100c7a0c",
+  "schema": {
+    "name": "quiz_question",
+    "description": "Individual questions and answers within a quiz session.",
+    "fields": [
+      {
+        "name": "id",
+        "description": "Unique identifier for the quiz question.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System identifier"
+        }
+      },
+      {
+        "name": "data_creator",
+        "description": "id of the user who creates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal auditing"
+        }
+      },
+      {
+        "name": "data_updater",
+        "description": "id of the user who updates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal auditing"
+        }
+      },
+      {
+        "name": "create_time",
+        "description": "create time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System metadata"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "update_time",
+        "description": "update time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System metadata"
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "quiz_id",
+        "description": "Foreign key referencing the parent quiz.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Relational integrity"
+        }
+      },
+      {
+        "name": "question_text",
+        "description": "The text of the question asked.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Content"
+        }
+      },
+      {
+        "name": "correct_answer",
+        "description": "The correct answer to the question.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Content"
+        }
+      },
+      {
+        "name": "user_answer",
+        "description": "The answer provided by the user.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "User input"
+        }
+      },
+      {
+        "name": "is_correct",
+        "description": "Boolean indicating if the user answered correctly.",
+        "type": 3,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Performance tracking"
+        }
+      }
+    ],
+    "indexes": [
+      {
+        "fields": [
+          "id"
+        ],
+        "unique": true,
+        "primary": true,
+        "order": false
+      },
+      {
+        "fields": [
+          "quiz_id"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "data_creator"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "data_updater"
+        ],
+        "order": false
+      }
+    ],
+    "relations": [
+      {
+        "referencing_fields": [
+          "quiz_id"
+        ],
+        "referenced_entity": {
+          "name": "quiz"
+        },
+        "referenced_fields": [
+          "id"
+        ],
+        "cascade": true
+      }
+    ]
+  },
+  "task": {
+    "id": "693b83460b35e4b62b0f24d1",
+    "root": "6938e05c60b30fd313d1ecfa",
+    "project": "6938e05c60b30fd313d1ecf9",
+    "user": "58f1e300-90d1-70cc-bada-f4dfacd9449e"
+  },
+  "namespace": {
+    "id": "01987547fc6c72ecb453bd2736bd4ea0",
+    "tenant": 2,
+    "name": "global-1",
+    "default": true
+  },
+  "revision": 1
+}
